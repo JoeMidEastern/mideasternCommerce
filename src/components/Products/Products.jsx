@@ -1,29 +1,56 @@
-import React from 'react'
-import {Grid} from '@material-ui/core'
+import React, {useState, useEffect} from 'react'
+import {Grid, responsiveFontSizes} from '@material-ui/core'
 import Product from './Product/Product'
-import useStyles from './Product/styles'
+import useStyles from './styles'
+import {commerce} from '../../lib/commerce'
 
-const products = [
-    {id: 1,  name: 'test1', description: 'test1 description of this product', price: '$7643', image:'https://images.unsplash.com/photo-1564730465543-e732e7fc9c10?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZW5naW5lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
-    {id: 2,  name: 'test2', description: 'test2 description of this product', price: '$$176', image: 'https://images.unsplash.com/photo-1600377232142-164c095e686e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZW5naW5lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' }, 
-    {id: 1,  name: 'test1', description: 'test1 description of this product', price: '$7643', image: 'https://images.unsplash.com/photo-1520642589361-855efeb16791?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGVuZ2luZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
-]
+
 
 const Products = () => {
+
+    const [products, setProducts] = useState([])
+    const [cart, setCart] = useState({})
+
+    const fetchProducts = async () => {
+        const {data} = await commerce.products.list()
+        console.log(data)
+        setProducts(data)
+    }
+
+    const fetchCart = async () =>{
+        const response = await commerce.cart.retrieve()
+        setCart(response)
+    }
+
+    const handleAddToCart = async (productId, quantity) => {
+        const item = await commerce.cart.add(productId, quantity)
+
+        setCart(item.cart)
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+
     const classes = useStyles()
     return (
-        <main marginTop='4rem' className={classes.content}>
+      
+       
+        <main className={classes.content}>
             <div className={classes.toolbar}/> 
             <Grid container justify='center' spacing={4}>
             {
                 products.map((product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                            <Product product={product}/>
+                            <Product product={product} />
                         </Grid>
                 ))
             }
             </Grid>
         </main>
+
+        
     )
 }
 
