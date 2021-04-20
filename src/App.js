@@ -1,4 +1,4 @@
-import Products from "./components/Product/Products";
+import Products from "./components/Products/Products";
 import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
