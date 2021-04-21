@@ -12,6 +12,7 @@ const App = () => {
 		const { data } = await commerce.products.list();
 
 		setProducts(data);
+		console.log("PRODUCT:  ", products);
 	};
 
 	const fetchCart = async () => {
@@ -23,13 +24,14 @@ const App = () => {
 		const item = await commerce.cart.add(productId, quantity);
 
 		setCart(item.cart);
+		console.log(cart);
 	};
 
 	useEffect(() => {
 		fetchProducts();
 		fetchCart();
 	}, []);
-	console.log(cart);
+
 	//////////////////////////////////////////////
 	return (
 		<>
