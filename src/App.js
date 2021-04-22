@@ -1,42 +1,51 @@
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
-import Cart from "./components/Cart/Cart";
 import Products from "./components/Products/Products";
-import Navbar from "./components/Navbar/Navbar";
+import Navigate from "./components/Navigate/Navigate";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
-	//////////////////////////////////////////////
 	const [products, setProducts] = useState([]);
-	const [cart, setCart] = useState();
+	const [cartData, setCartData] = useState({});
 
 	const fetchProducts = async () => {
-		const { data } = await commerce.products.list();
-
-		setProducts(data);
+		const response = await commerce.products.list();
+		setProducts(response && response.data);
 	};
 
-	const fetchCart = async () => {
-		const cart = commerce.cart.retrieve();
-		setCart(cart);
-	};
-
-	const handleAddToCart = async (productId, quantity) => {
-		setCart(await commerce.cart.add(productId, quantity));
+	const fetchCartData = async () => {
+		const response = await commerce.cart.retrieve();
+		setCartData(response);
 	};
 
 	useEffect(() => {
 		fetchProducts();
-		fetchCart();
+		fetchCartData();
 	}, []);
-	console.log("Cart State: ---> ", cart);
-	console.log(cart);
-	//////////////////////////////////////////////
+	console.log("PRODUCTS === ", { products });
+
+	console.log("CART DATA === ", cartData);
+
+	const addProduct = async (productId, quantity) => {
+		const response = await commerce.cart.add(productId, quantity);
+		setCartData(response.cart);
+	};
+
 	return (
-		<>
-			<Navbar />
-			{/* <Cart cart={cart} /> */}
-			<Products products={products} onAddToCart={handleAddToCart} />
-		</>
+		<Router>
+			<div>
+				<Navigate cartItems={cartData.total_items} />
+				<Switch>
+					<Route exact path="/">
+						<main className="main-container">
+							<Products products={products} addProduct={addProduct} />
+						</main>
+					</Route>
+				</Switch>
+				<Footer />
+			</div>
+		</Router>
 	);
 };
 
