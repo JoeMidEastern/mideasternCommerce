@@ -41,7 +41,7 @@ const Navigate = ({ cartItems }) => {
 							Cart
 						</Nav.Link>
 					</LinkContainer>
-					<LinkContainer to="login">
+					<LinkContainer to="/login">
 						<Nav.Link>
 							<i className="fa fa-user"></i>Sign In
 						</Nav.Link>

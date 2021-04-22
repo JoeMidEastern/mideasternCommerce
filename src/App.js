@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { commerce } from "./lib/commerce";
-import Products from "./components/Products/Products";
-import Navigate from "./components/Navigate/Navigate";
-import Footer from "./components/Footer/Footer";
+import { commerce } from "./lib/commerce.js";
+import Products from "./components/Products/Products.js";
+import Navigate from "./components/Navigate/Navigate.js";
+import Footer from "./components/Footer/Footer.js";
+import Cart from "./components/Cart/Cart.js";
 
 const App = () => {
 	const [products, setProducts] = useState([]);
@@ -43,6 +44,7 @@ const App = () => {
 						</main>
 					</Route>
 				</Switch>
+				<Cart cartData={cartData} />
 				<Footer />
 			</div>
 		</Router>
