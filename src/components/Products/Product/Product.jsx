@@ -16,7 +16,10 @@ const Product = ({product, onAddToCart}) => {
                     <Typography variant='h5' gutterBottom>
                         {product.name}
                     </Typography>
-                    <Typography variant='h5' >
+
+                </div>
+                <div>
+                <Typography variant='h6' >
                         {product.price.formatted_with_code}
                     </Typography>
                 </div>

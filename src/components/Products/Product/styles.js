@@ -5,7 +5,9 @@ export default makeStyles(() => ({
 		maxWidth: "100%",
 	},
 	media: {
-		height: 0,
+		width: "50%",
+		height: "auto",
+		margin: "auto",
 		paddingTop: "56.25%",
 	},
 	carDActions: {

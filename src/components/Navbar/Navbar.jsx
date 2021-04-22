@@ -3,7 +3,7 @@ import {ShoppingCart} from '@material-ui/icons'
 import logo from '../../assets/logo_medium.png'
 import useStyles from './styles'
 
-const Navbar = ({totalItems}) => {
+const Navbar = () => {
     const classes = useStyles()
     return (
         <>
@@ -16,7 +16,7 @@ const Navbar = ({totalItems}) => {
                         <div className={classes.grow}/>
                         <div className={classes.button}>
                             <IconButton aria-label='Show Cart Items' color='inherit'>
-                                <Badge badgeContent={totalItems} color='secondary'>
+                                <Badge badgeContent={2} color='secondary'>
                                     <ShoppingCart/>
                                 </Badge>
 

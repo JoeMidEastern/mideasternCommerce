@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+
 import {Grid, responsiveFontSizes} from '@material-ui/core'
 import Product from './Product/Product'
 import useStyles from './styles'
-import {commerce} from '../../lib/commerce'
+//import {commerce} from '../../lib/commerce'
 
 
 
