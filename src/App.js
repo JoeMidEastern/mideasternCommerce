@@ -33,6 +33,24 @@ const App = () => {
 		setCartData(response.cart);
 	};
 
+	const updateProduct = async (productId, quantity) => {
+		const response = await commerce.cart.update(productId, { quantity });
+		setCartData(response.cart);
+		console.log("UPDATED ONE ===> ", cartData.line_items);
+	};
+
+	const handleEmptyCart = async () => {
+		const response = await commerce.cart.empty();
+		setCartData(response.cart);
+	};
+
+	const removeItemFromCart = async itemId => {
+		const response = await commerce.cart.remove(itemId);
+		setCartData(response.cart);
+	};
+	console.log("CART DATA ====> ", cartData);
+
+	console.log("PRODUCTS ===> ", products);
 	return (
 		<Router>
 			<div>
@@ -43,8 +61,16 @@ const App = () => {
 							<Products products={products} addProduct={addProduct} />
 						</main>
 					</Route>
+					<Route exact path="/cart">
+						<Cart
+							cartData={cartData}
+							updateProduct={updateProduct}
+							handleEmptyCart={handleEmptyCart}
+							removeItemFromCart={removeItemFromCart}
+						/>
+					</Route>
 				</Switch>
-				<Cart cartData={cartData} />
+
 				<Footer />
 			</div>
 		</Router>
