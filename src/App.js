@@ -48,13 +48,19 @@ const App = () => {
 		const response = await commerce.cart.remove(itemId);
 		setCartData(response.cart);
 	};
-	console.log("CART DATA ====> ", cartData);
 
-	console.log("PRODUCTS ===> ", products);
+	console.log("CART DATA =====> ", cartData);
+	console.log("SUB TOTAL ===> ", cartData.subtotal);
 	return (
 		<Router>
 			<div>
-				<Navigate cartItems={cartData.total_items} />
+				<Navigate
+					cartItems={cartData.total_items}
+					totalCost={
+						(cartData.subtotal && cartData.subtotal.formatted_with_symbol) ||
+						"00.00"
+					}
+				/>
 				<Switch>
 					<Route exact path="/">
 						<main className="main-container">

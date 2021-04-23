@@ -9,13 +9,20 @@ const Product = ({ product, addProduct }) => {
 				style={{ height: "18rem" }}
 			/>
 			<Card.Body>
-				<Card.Title style={{ height: "4rem" }}>{product.name}</Card.Title>
-				<Card.Text>{product.price.formatted_with_symbols}</Card.Text>
-				{/* <Card.Text>
-					<div dangerouslySetInnerHTML={{ __html: product.description }} />
-				</Card.Text> */}
-				<Button variant="primary" onClick={() => addProduct(product.id, 1)}>
-					<i className="fas fa-cart-plus"></i>Add To Cart
+				<Card.Title>
+					<h6 className="truncated-desc">{product.name}</h6>
+				</Card.Title>
+
+				<Card.Text className="my-3">
+					{product.price.formatted_with_symbol}
+				</Card.Text>
+
+				<Button
+					className="btn-block"
+					variant="primary"
+					onClick={() => addProduct(product.id, 1)}
+				>
+					<i className="fas fa-cart-plus mr-3"></i>Add To Cart
 				</Button>
 			</Card.Body>
 		</Card>

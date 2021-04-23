@@ -8,6 +8,9 @@ import {
 	Card,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import EmptyBanner from "./EmptyBanner";
+import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
 
 const Cart = ({
 	cartData,
@@ -15,8 +18,19 @@ const Cart = ({
 	handleEmptyCart,
 	removeItemFromCart,
 }) => {
-	if (!cartData.line_items || !cartData.line_items.length)
-		return <h1>...LOADING</h1>;
+	const [showSpinner, setShowSpinner] = useState(true);
+
+	const loading = () => {
+		setTimeout(() => {
+			setShowSpinner(false);
+		}, 2000);
+		if (showSpinner) {
+			return <SpinnerLoader />;
+		}
+		return <EmptyBanner />;
+	};
+
+	if (!cartData.line_items || !cartData.line_items.length) return loading();
 
 	return (
 		<>
@@ -78,20 +92,30 @@ const Cart = ({
 							);
 						})}
 					</ListGroup>
-					<Col md={4}>
+
+					<Col>
 						<Card className="my-3">
 							<ListGroup variant="flush">
 								<ListGroup.Item>
-									<h2>Subtotal: </h2>
-								</ListGroup.Item>
-								<ListGroup.Item>
-									<Button type="button" className="btn-block">
+									<Button type="button" className="btn-block my-4">
 										Proceed To Checkout
 									</Button>
 								</ListGroup.Item>
 							</ListGroup>
 						</Card>
 					</Col>
+					<ListGroup.Item>
+						<Col md={4}>
+							<Button
+								variant="danger"
+								type="button"
+								className="btn-block my-4"
+								onClick={() => handleEmptyCart()}
+							>
+								Empty Cart
+							</Button>
+						</Col>
+					</ListGroup.Item>
 				</Col>
 			</Row>
 		</>

@@ -2,3 +2,10 @@
 	position: relative;
 	min-height: 80vh;
 }
+
+.truncated-desc {
+	width: 95%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
