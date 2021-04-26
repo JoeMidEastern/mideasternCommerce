@@ -5,6 +5,7 @@ import Products from "./components/Products/Products.js";
 import Navigate from "./components/Navigate/Navigate.js";
 import Footer from "./components/Footer/Footer.js";
 import Cart from "./components/Cart/Cart.js";
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => {
 	const [products, setProducts] = useState([]);
@@ -73,7 +74,15 @@ const App = () => {
 							updateProduct={updateProduct}
 							handleEmptyCart={handleEmptyCart}
 							removeItemFromCart={removeItemFromCart}
+							totalCost={
+								(cartData.subtotal &&
+									cartData.subtotal.formatted_with_symbol) ||
+								"00.00"
+							}
 						/>
+					</Route>
+					<Route exact path="/checkout">
+						<Checkout cartData={cartData} />
 					</Route>
 				</Switch>
 

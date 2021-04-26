@@ -17,6 +17,7 @@ const Cart = ({
 	updateProduct,
 	handleEmptyCart,
 	removeItemFromCart,
+	totalCost,
 }) => {
 	const [showSpinner, setShowSpinner] = useState(true);
 
@@ -35,8 +36,9 @@ const Cart = ({
 	return (
 		<>
 			<Row>
-				<Col md={8}>
-					<h1>Shopping Cart</h1>
+				<Col style={{ textAlign: "center" }} md={8}>
+					<h1 className="my-3 p-1">Shopping Cart</h1>
+
 					<ListGroup variant="flush">
 						{cartData.line_items.map(product => {
 							return (
@@ -97,9 +99,14 @@ const Cart = ({
 						<Card className="my-3">
 							<ListGroup variant="flush">
 								<ListGroup.Item>
-									<Button type="button" className="btn-block my-4">
-										Proceed To Checkout
-									</Button>
+									<h4>Total Cost: {totalCost}</h4>
+								</ListGroup.Item>
+								<ListGroup.Item>
+									<Link to="/checkout">
+										<Button type="button" className="btn-block my-4">
+											Proceed To Checkout
+										</Button>
+									</Link>
 								</ListGroup.Item>
 							</ListGroup>
 						</Card>
