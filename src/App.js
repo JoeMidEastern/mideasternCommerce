@@ -25,9 +25,9 @@ const App = () => {
 		fetchProducts();
 		fetchCartData();
 	}, []);
-	console.log("PRODUCTS === ", { products });
+	//console.log("PRODUCTS === ", { products });
 
-	console.log("CART DATA === ", cartData);
+	//console.log("CART DATA === ", cartData);
 
 	const addProduct = async (productId, quantity) => {
 		const response = await commerce.cart.add(productId, quantity);
@@ -37,7 +37,7 @@ const App = () => {
 	const updateProduct = async (productId, quantity) => {
 		const response = await commerce.cart.update(productId, { quantity });
 		setCartData(response.cart);
-		console.log("UPDATED ONE ===> ", cartData.line_items);
+		//console.log("UPDATED ONE ===> ", cartData.line_items);
 	};
 
 	const handleEmptyCart = async () => {
@@ -50,8 +50,8 @@ const App = () => {
 		setCartData(response.cart);
 	};
 
-	console.log("CART DATA =====> ", cartData);
-	console.log("SUB TOTAL ===> ", cartData.subtotal);
+	//console.log("CART DATA =====> ", cartData);
+	//console.log("SUB TOTAL ===> ", cartData.subtotal);
 	return (
 		<Router>
 			<div>
@@ -82,7 +82,7 @@ const App = () => {
 						/>
 					</Route>
 					<Route exact path="/checkout">
-						<Checkout cartData={cartData} />
+						<Checkout />
 					</Route>
 				</Switch>
 

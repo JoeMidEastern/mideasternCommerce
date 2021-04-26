@@ -12,8 +12,8 @@ import { useLocation } from "react-router-dom";
 
 const Navigate = ({ cartItems, totalCost }) => {
 	const location = useLocation();
-	console.log("CART ITEMS === ", cartItems);
-	console.log("TOTAL COST ===> ", totalCost);
+	//console.log("CART ITEMS === ", cartItems);
+	//console.log("TOTAL COST ===> ", totalCost);
 	return (
 		<Navbar className="my-2" bg="dark" variant="dark" expand="lg">
 			<LinkContainer to="/">
