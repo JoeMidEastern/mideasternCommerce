@@ -6,6 +6,7 @@ import {
 	Button,
 	Grid,
 	Typography,
+	Container,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import CustomTextField from "./CustomTextField";
@@ -19,6 +20,15 @@ const AddressForm = ({ checkoutToken }) => {
 	const [shippingOptions, setShippingOptions] = useState([]);
 	const [shippingOption, setShippingOption] = useState("");
 
+	/**
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * COUNTRY FETCHING LOGIC
+	 */
+
 	const countries = Object.entries(shippingCountries).map(([code, name]) => {
 		return {
 			id: code,
@@ -26,22 +36,66 @@ const AddressForm = ({ checkoutToken }) => {
 		};
 	});
 
+	const subdivisions = Object.entries(shippingSubdivisions).map(
+		([code, name]) => {
+			return {
+				id: code,
+				label: name,
+			};
+		}
+	);
+
 	const fetchShippingCountries = async checkoutTokenId => {
 		const { countries } = await commerce.services.localeListShippingCountries(
 			checkoutTokenId
 		);
 		console.log(countries);
 		setShippingCountries(countries);
-		setShippingCountry(Object.keys(countries));
+		setShippingCountry(Object.keys(countries)[0]);
+	};
+	/**COUNTRY FETCHING LOGIC
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * SUBDIVISION FETCHING LOGIC
+	 */
+
+	const fetchSubdivisions = async countryCode => {
+		const { subdivisions } = await commerce.services.localeListSubdivisions(
+			countryCode
+		);
+		setShippingSubdivisions(subdivisions);
+		setShippingSubdivision(Object.keys(subdivisions)[0]);
 	};
 
 	useEffect(() => {
 		fetchShippingCountries(checkoutToken.id);
 	}, []);
 
+	useEffect(() => {
+		if (shippingCountry) {
+			fetchSubdivisions(shippingCountry);
+		}
+	}, [shippingCountry]);
+	/**SUBDIVISION FETCHING LOGIC
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 * ##########################################################################
+	 *
+	 */
+
 	const methods = useForm();
 	return (
-		<>
+		<Container>
 			<Typography variant="h6" gutterBottom>
 				Shipping Address
 			</Typography>
@@ -52,7 +106,6 @@ const AddressForm = ({ checkoutToken }) => {
 						<CustomTextField required name="lastName" label="Last name" />
 						<CustomTextField required name="address1" label="Address" />
 						<CustomTextField required name="email" label="Email" />
-						<CustomTextField required name="state" label="State" />
 						<CustomTextField required name="city" label="City" />
 						<CustomTextField required name="zipcode" label="ZipCode" />
 
@@ -73,16 +126,23 @@ const AddressForm = ({ checkoutToken }) => {
 							</Select>
 						</Grid>
 
-						{/*}
-						Grid itemxs={12} sm={6}>
-							<InputLabel>Shipping Subdivisiooon</InputLabel>
-							<Select value={} fullWidth onChange={}>
-								<MenuItem key={} value={}>
-									Select Me
-								</MenuItem>
+						<Grid items xs={12} sm={6}>
+							<InputLabel>Shipping Subdivision</InputLabel>
+							<Select
+								value={shippingSubdivision}
+								fullWidth
+								onChange={e => setShippingSubdivision(e.target.value)}
+							>
+								{subdivisions.map(subdivision => {
+									return (
+										<MenuItem key={subdivision.id} value={subdivision.id}>
+											{subdivision.label}
+										</MenuItem>
+									);
+								})}
 							</Select>
 						</Grid>
-
+						{/*
 						<Grid itemxs={12} sm={6}>
 							<InputLabel>Shipping Options</InputLabel>
 							<Select value={} fullWidth onChange={}>
@@ -94,7 +154,7 @@ const AddressForm = ({ checkoutToken }) => {
 					</Grid>
 				</form>
 			</FormProvider>
-		</>
+		</Container>
 	);
 };
 
