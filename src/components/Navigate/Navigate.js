@@ -1,12 +1,4 @@
-import {
-	Navbar,
-	Nav,
-	NavLink,
-	Dropdown,
-	NavItem,
-	Badge,
-	Container,
-} from "react-bootstrap";
+import { Navbar, Nav, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useLocation } from "react-router-dom";
 
@@ -19,6 +11,7 @@ const Navigate = ({ cartItems, totalCost }) => {
 			<LinkContainer to="/">
 				<Navbar.Brand>
 					<img
+						alt="Mid Eastern Chrome Stop"
 						src="/resources/img/ME.png"
 						style={{ height: "auto", width: "14rem" }}
 						className="ml-3"

@@ -1,4 +1,4 @@
-import { TextField, Grid, Checkbox } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { useFormContext, Controller } from "react-hook-form";
 
 const CutomTextField = ({ name, label, required }) => {

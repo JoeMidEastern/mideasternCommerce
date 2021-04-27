@@ -8,11 +8,12 @@ import {
 	Typography,
 	Container,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import CustomTextField from "./CustomTextField";
 import { commerce } from "../../lib/commerce";
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState("");
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -155,14 +156,27 @@ const AddressForm = ({ checkoutToken }) => {
 				Shipping Address
 			</Typography>
 			<FormProvider {...methods}>
-				<form onSubmit="">
-					<Grid container spacing={3}>
+				<form
+					onSubmit={methods.handleSubmit(data =>
+						next({
+							...data,
+							shippingCountry,
+							shippingSubdivision,
+							shippingOption,
+						})
+					)}
+				>
+					<Grid container spacing={6}>
 						<CustomTextField required name="firstName" label="First name" />
 						<CustomTextField required name="lastName" label="Last name" />
 						<CustomTextField required name="address1" label="Address" />
 						<CustomTextField required name="email" label="Email" />
 						<CustomTextField required name="city" label="City" />
-						<CustomTextField required name="zipcode" label="Zip / Posal Code" />
+						<CustomTextField
+							required
+							name="zipcode"
+							label="Zip / Postal code"
+						/>
 						<Grid item xs={12} sm={6}>
 							<InputLabel>Shipping Country</InputLabel>
 							<Select
@@ -212,6 +226,16 @@ const AddressForm = ({ checkoutToken }) => {
 							</Select>
 						</Grid>
 					</Grid>
+					<br />
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<Link to="/cart">
+							<Button variant="outlined">Back To Cart</Button>
+						</Link>
+
+						<Button type="submit" variant="contained">
+							Continue
+						</Button>
+					</div>
 				</form>
 			</FormProvider>
 		</Container>

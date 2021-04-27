@@ -5,7 +5,6 @@ import {
 	Step,
 	StepLabel,
 	Typography,
-	CircularProgress,
 	Divider,
 	Button,
 } from "@material-ui/core";
@@ -18,9 +17,10 @@ import Confirmation from "./Confirmation";
 
 const steps = ["Shipping Address", "Payment Details"];
 
-const Checkout = ({ cartData }) => {
+const Checkout = ({ cartData, order, onCaptureCheckout, error }) => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [checkoutToken, setCheckoutToken] = useState(null);
+	const [shippingData, setShippingData] = useState({});
 
 	useEffect(() => {
 		const generateToken = async () => {
@@ -37,12 +37,31 @@ const Checkout = ({ cartData }) => {
 		generateToken();
 	}, []);
 
+	const nextStep = () => {
+		setActiveStep(prevActiveStep => prevActiveStep + 1);
+	};
+
+	const backStep = () => {
+		setActiveStep(prevActiveStep => prevActiveStep - 1);
+	};
+
+	const next = data => {
+		setShippingData(data);
+		nextStep();
+	};
+
 	const PForm = () =>
 		activeStep === 0 ? (
-			<AddressForm checkoutToken={checkoutToken} />
+			<AddressForm checkoutToken={checkoutToken} next={next} />
 		) : (
-			<PaymentForm />
+			<PaymentForm
+				checkoutToken={checkoutToken}
+				backStep={backStep}
+				onCaptureCheckout={onCaptureCheckout}
+				nextStep={nextStep}
+			/>
 		);
+
 	return (
 		<Container>
 			<Paper style={{ margin: "3rem 0" }}>
