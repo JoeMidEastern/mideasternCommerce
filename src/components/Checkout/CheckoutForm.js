@@ -1,4 +1,4 @@
-import { Form, Row, Col, Button } from "react-bootstrap";
+/* import { Form, Row, Col, Button } from "react-bootstrap";
 
 const CheckoutForm = () => {
 	return (
@@ -84,3 +84,4 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
+ */
