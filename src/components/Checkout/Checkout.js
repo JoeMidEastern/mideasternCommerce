@@ -55,6 +55,7 @@ const Checkout = ({ cartData, order, onCaptureCheckout, error }) => {
 			<AddressForm checkoutToken={checkoutToken} next={next} />
 		) : (
 			<PaymentForm
+				shippingData={shippingData}
 				checkoutToken={checkoutToken}
 				backStep={backStep}
 				onCaptureCheckout={onCaptureCheckout}

@@ -55,7 +55,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 		const { countries } = await commerce.services.localeListShippingCountries(
 			checkoutTokenId
 		);
-		console.log(countries);
+
 		setShippingCountries(countries);
 		setShippingCountry(Object.keys(countries)[0]);
 	};
@@ -109,7 +109,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 		setShippingOptions(options);
 		setShippingOption(options[0].id);
 	};
-	console.trace(fetchShippingOptions);
+	//console.trace(fetchShippingOptions);
 
 	/**SHIPPING OPTIONS FETCHING LOGIC
 	 * ##########################################################################
