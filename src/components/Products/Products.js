@@ -1,11 +1,9 @@
 import { Row, Col, Container } from "react-bootstrap";
 import Product from "../Product/Product";
-import CarouselHome from "../CarouselHome/CarouselHome";
 
 const Products = ({ products, addProduct }) => {
 	return (
 		<>
-			<CarouselHome />
 			<Container className="my-3">
 				<Row>
 					{products.map(product => (

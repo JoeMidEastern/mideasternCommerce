@@ -92,7 +92,7 @@ const PaymentForm = ({
 					email: shippingData.email,
 				},
 				shipping: {
-					name: "International",
+					name: "To: ",
 					street: shippingData.address1,
 					town_city: shippingData.city,
 					county_state: shippingData.shippingSubdivision,

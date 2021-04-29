@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce.js";
+import CarouselHome from "./components/CarouselHome/CarouselHome";
 import Products from "./components/Products/Products.js";
 import Navigate from "./components/Navigate/Navigate.js";
 import Footer from "./components/Footer/Footer.js";
 import Cart from "./components/Cart/Cart.js";
 import Checkout from "./components/Checkout/Checkout";
+import CategoryOptions from "./components/Categories/CategoryOptions/CategoryOptions";
 
 const App = () => {
 	const [products, setProducts] = useState([]);
@@ -87,6 +89,8 @@ const App = () => {
 				<Switch>
 					<Route exact path="/">
 						<main className="main-container">
+							<CarouselHome />
+							<CategoryOptions />
 							<Products products={products} addProduct={addProduct} />
 						</main>
 					</Route>
