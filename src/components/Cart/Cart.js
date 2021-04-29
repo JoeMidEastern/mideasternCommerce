@@ -112,15 +112,15 @@ const Cart = ({
 						</Card>
 					</Col>
 					<ListGroup.Item>
-						<Col md={4}>
-							<Button
+						<Col sm={12}>
+							<i
 								variant="danger"
 								type="button"
 								className="btn-block my-4"
 								onClick={() => handleEmptyCart()}
-							>
-								Empty Cart
-							</Button>
+								className="fas fa-trash-alt fa-4x ml-auto"
+							></i>
+							<p>Empty Cart</p>
 						</Col>
 					</ListGroup.Item>
 				</Col>
