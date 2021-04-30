@@ -1,23 +1,8 @@
-import { Navbar, Nav, Badge, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { commerce } from "../../lib/commerce";
 import { useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 
 const Navigate = ({ cartItems, totalCost }) => {
-  // Category DropDown logic
-  const [cats, setCats] = useState([]);
-  const fetchCats = async () => {
-    const { data } = await commerce.categories.list();
-    setCats(data);
-  };
-
-  useEffect(() => {
-    fetchCats();
-  }, []);
-
-  console.log(cats);
-  /////////////////////////////
   const location = useLocation();
   //console.log("CART ITEMS === ", cartItems);
   //console.log("TOTAL COST ===> ", totalCost);
@@ -64,17 +49,6 @@ const Navigate = ({ cartItems, totalCost }) => {
               <i className="fa fa-user"></i>Sign In
             </Nav.Link>
           </LinkContainer>
-          <NavDropdown title="Categories" id="basic-nav-dropdown">
-            {cats.map((cat) => {
-              return (
-                <>
-                  <LinkContainer to={`/categories/${cat.slug}`}>
-                    <NavDropdown.Item> {cat.name}</NavDropdown.Item>
-                  </LinkContainer>
-                </>
-              );
-            })}
-          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
