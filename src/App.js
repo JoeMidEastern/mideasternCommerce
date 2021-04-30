@@ -11,8 +11,11 @@ import CategoryOptions from "./components/Categories/CategoryOptions/CategoryOpt
 import CMTscreen from "./components/Categories/CategoryOptions/CommercialTrucks/CMTscreen";
 import RVscreen from "./components/Categories/CategoryOptions/RVCategory/RVscreen";
 import CAscreen from "./components/Categories/CategoryOptions/ClassicAntique/CAscreen";
+import CategoryList from "./components/Categories/CategoryOptions/CategoryList";
+
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [cartData, setCartData] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,6 +25,13 @@ const App = () => {
     setProducts(response && response.data);
   };
 
+  ///////////////////////////////////////////////////////////
+  const fetchCategories = async () => {
+    const response = await commerce.categories.list();
+    setCategories(response);
+  };
+  ///////////////////////////////////////////////////////////
+
   const fetchCartData = async () => {
     const response = await commerce.cart.retrieve();
     setCartData(response);
@@ -30,6 +40,7 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCartData();
+    fetchCategories();
   }, []);
   //console.log("PRODUCTS === ", { products });
 
@@ -37,6 +48,7 @@ const App = () => {
 
   const addProduct = async (productId, quantity) => {
     const response = await commerce.cart.add(productId, quantity);
+
     setCartData(response.cart);
   };
 
@@ -91,6 +103,11 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <main className="main-container">
+              <CategoryList
+                products={products}
+                categories={categories}
+                fetchCategories={fetchCategories}
+              />
               <CarouselHome />
               <CategoryOptions />
               <Products products={products} addProduct={addProduct} />
