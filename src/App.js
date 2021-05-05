@@ -11,7 +11,7 @@ import CategoryOptions from "./components/Categories/CategoryOptions/CategoryOpt
 import CMTscreen from "./components/Categories/CategoryOptions/CommercialTrucks/CMTscreen";
 import RVscreen from "./components/Categories/CategoryOptions/RVCategory/RVscreen";
 import CAscreen from "./components/Categories/CategoryOptions/ClassicAntique/CAscreen";
-import CategoryList from "./components/Categories/CategoryOptions/CategoryList";
+//import CategoryList from "./components/Categories/CategoryOptions/CategoryList.js";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -28,9 +28,31 @@ const App = () => {
   ///////////////////////////////////////////////////////////
   const fetchCategories = async () => {
     const response = await commerce.categories.list();
-    setCategories(response);
+    setCategories(response.data);
   };
   ///////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////
+  // fetch by categories
+  ///////////////////////////////////////////////////////////
+
+  const fetchProductsByTrucks = async () => {
+    const response = await commerce.products.list({
+      category_slug: ["commercial-trucks"],
+    });
+    setProducts(response.data);
+    console.log(response.data);
+  };
+
+  const fetchProductsByClassics = async () => {
+    const response = await commerce.products.list({
+      category_slug: ["classics"],
+    });
+    setProducts(response.data);
+    console.log(response.data);
+  };
+
+  //////////////////////////////////////////////////////////
 
   const fetchCartData = async () => {
     const response = await commerce.cart.retrieve();
@@ -90,6 +112,7 @@ const App = () => {
 
   //console.log("CART DATA =====> ", cartData);
   //console.log("SUB TOTAL ===> ", cartData.subtotal);
+  console.log(products);
   return (
     <Router>
       <div>
@@ -103,11 +126,7 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <main className="main-container">
-              <CategoryList
-                products={products}
-                categories={categories}
-                fetchCategories={fetchCategories}
-              />
+              {/* <CategoryList categories={categories} /> */}
               <CarouselHome />
               <CategoryOptions />
               <Products products={products} addProduct={addProduct} />
@@ -134,14 +153,22 @@ const App = () => {
               error={errorMessage}
             />
           </Route>
-          <Route exact path="/categories/commercial-trucks">
-            <CMTscreen />
+          <Route path="/categories/commercial-trucks">
+            <CMTscreen
+              products={products}
+              fetchProductsByTrucks={fetchProductsByTrucks}
+              addProduct={addProduct}
+            />
           </Route>
-          <Route exact path="/categories/rv">
+          <Route path="/categories/rv">
             <RVscreen />
           </Route>
-          <Route exat path="/categories/classics">
-            <CAscreen />
+          <Route path="/categories/classics">
+            <CAscreen
+              products={products}
+              fetchProductsByClassics={fetchProductsByClassics}
+              addProduct={addProduct}
+            />
           </Route>
         </Switch>
 

@@ -1,42 +1,29 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+/* import { Row, Col, Dropdown } from "react-bootstrap";
 
-/*
- *
- * You should fetch a list of categories from the SDK.
- * With that list, you should create a select dropdown or list that when selected calls the product api
- * filtering by the selected category.
- *
- */
-const CategoryList = ({ products, categories, fetchCategories }) => {
-  const data = categories.data;
-  data.map((d) => {
-    console.log(d.name);
-  });
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+import React from "react";
+
+const CategoryList = ({ categories, products }) => {
+  console.log(categories);
   return (
-    <Container fluid>
-      <Row>
-        {data.map((d) => {
-          return (
-            <Col
-              lg={2}
-              className="ml-auto mr-auto my-3"
-              style={{ textAlign: "center" }}
-            >
-              <Link to={d.slug}>
-                <h4>{d.name}</h4>
-              </Link>
-            </Col>
-          );
-        })}
-      </Row>
-    </Container>
+    <Row>
+      {categories.map((category) => {
+        return (
+          <Col ls={2}>
+            <Dropdown>
+              <Dropdown.Toggle variant="light" id="dropdown-basic">
+                {category.name}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">{category.name}</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+        );
+      })}
+    </Row>
   );
 };
 
 export default CategoryList;
+ */

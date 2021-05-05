@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Product from "../../../Product/Product";
 
-const CAscreen = () => {
+const CAscreen = ({ products, fetchProductsByClassics, addProduct }) => {
+  useEffect(() => {
+    fetchProductsByClassics();
+  }, []);
   return (
-    <div>
-      <h1>Classics and Antiques</h1>
-      <h3>...</h3>
-    </div>
+    <>
+      {products.map((product) => (
+        <div key={product.id}>
+          <Product product={product} addProduct={addProduct} />
+        </div>
+      ))}
+    </>
   );
 };
 

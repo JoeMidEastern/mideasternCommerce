@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { commerce } from "../../../../lib/commerce.js";
+import Product from "../../../Product/Product";
 
-const CMTscreen = () => {
+const CMTscreen = ({ products, fetchProductsByTrucks, addProduct }) => {
+  useEffect(() => {
+    fetchProductsByTrucks();
+  }, []);
   return (
-    <div>
-      <h1>COMMERCIAL TRUCKS</h1>
-      <h3>...</h3>
-    </div>
+    <>
+      {products.map((product) => (
+        <div key={product.id}>
+          <Product product={product} addProduct={addProduct} />
+        </div>
+      ))}
+    </>
   );
 };
-
 export default CMTscreen;
