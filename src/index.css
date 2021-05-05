@@ -1,11 +1,29 @@
 .main-container {
-	position: relative;
-	min-height: 80vh;
+  position: relative;
+  min-height: 80vh;
 }
 
 .truncated-desc {
-	width: 95%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  width: 95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-styled-border {
+  transition-duration: 0.2s;
+  transition-delay: 0s;
+}
+
+.product-styled-border:hover {
+  box-shadow: 0 0 15px 10px #ffd800;
+}
+
+.add-to-cart-btn {
+  transition-duration: 0.1s;
+  transition-delay: 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  box-shadow: 0 0 10px 2px #c74747;
 }

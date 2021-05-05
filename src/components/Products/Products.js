@@ -4,11 +4,14 @@ import Product from "../Product/Product";
 const Products = ({ products, addProduct }) => {
   return (
     <>
-      <Container className="my-3">
+      <Container fluid className="my-3">
         <Row>
           {products.map((product) => (
             <Col
-              style={{ display: "flex", justifyContent: "center" }}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
               key={product.id}
               sm={12}
               md={6}

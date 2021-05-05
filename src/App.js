@@ -12,6 +12,7 @@ import CMTscreen from "./components/Categories/CategoryOptions/CommercialTrucks/
 import RVscreen from "./components/Categories/CategoryOptions/RVCategory/RVscreen";
 import CAscreen from "./components/Categories/CategoryOptions/ClassicAntique/CAscreen";
 //import CategoryList from "./components/Categories/CategoryOptions/CategoryList.js";
+import MiscScreen from "./components/Categories/CategoryOptions/Misc/MiscScreen";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -47,6 +48,22 @@ const App = () => {
   const fetchProductsByClassics = async () => {
     const response = await commerce.products.list({
       category_slug: ["classics"],
+    });
+    setProducts(response.data);
+    console.log(response.data);
+  };
+
+  const fetchProductsByRvs = async () => {
+    const response = await commerce.products.list({
+      category_slug: ["rv"],
+    });
+    setProducts(response.data);
+    console.log(response.data);
+  };
+
+  const fetchProductsByMisc = async () => {
+    const response = await commerce.products.list({
+      category_slug: ["misc"],
     });
     setProducts(response.data);
     console.log(response.data);
@@ -161,12 +178,23 @@ const App = () => {
             />
           </Route>
           <Route path="/categories/rv">
-            <RVscreen />
+            <RVscreen
+              products={products}
+              fetchProductsByRvs={fetchProductsByRvs}
+              addProduct={addProduct}
+            />
           </Route>
           <Route path="/categories/classics">
             <CAscreen
               products={products}
               fetchProductsByClassics={fetchProductsByClassics}
+              addProduct={addProduct}
+            />
+          </Route>
+          <Route path="/categories/misc">
+            <MiscScreen
+              products={products}
+              fetchProductsByMisc={fetchProductsByMisc}
               addProduct={addProduct}
             />
           </Route>

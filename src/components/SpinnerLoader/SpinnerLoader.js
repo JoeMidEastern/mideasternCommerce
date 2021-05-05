@@ -12,6 +12,7 @@ const SpinnerLoader = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          color: "#ffd800",
         }}
         role="status"
         animation="grow"

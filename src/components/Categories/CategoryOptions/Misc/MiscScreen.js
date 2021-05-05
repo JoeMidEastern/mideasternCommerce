@@ -3,9 +3,9 @@ import { Row, Col } from "react-bootstrap";
 import { commerce } from "../../../../lib/commerce.js";
 import Product from "../../../Product/Product";
 
-const RVscreen = ({ products, fetchProductsByRvs, addProduct }) => {
+const MiscScreen = ({ products, fetchProductsByMisc, addProduct }) => {
   useEffect(() => {
-    fetchProductsByRvs();
+    fetchProductsByMisc();
   }, []);
   return (
     <Row>
@@ -27,4 +27,4 @@ const RVscreen = ({ products, fetchProductsByRvs, addProduct }) => {
     </Row>
   );
 };
-export default RVscreen;
+export default MiscScreen;
