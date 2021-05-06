@@ -146,7 +146,7 @@ const App = () => {
               {/* <CategoryList categories={categories} /> */}
               <CarouselHome />
               <CategoryOptions />
-              <Products products={products} addProduct={addProduct} />
+              {/* <Products products={products} addProduct={addProduct} /> */}
             </main>
           </Route>
           <Route exact path="/cart">
