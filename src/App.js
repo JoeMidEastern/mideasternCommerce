@@ -20,6 +20,7 @@ const App = () => {
   const [cartData, setCartData] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [taxesZone, setTaxesZone] = useState({});
 
   const fetchProducts = async () => {
     const response = await commerce.products.list();
@@ -167,6 +168,7 @@ const App = () => {
               cartData={cartData}
               order={order}
               onCaptureCheckout={handleCaptureCheckout}
+              /* fetchTaxes={fetchTaxes} */
               error={errorMessage}
             />
           </Route>
