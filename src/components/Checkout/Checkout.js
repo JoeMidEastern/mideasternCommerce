@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { Paper, Stepper, Step, StepLabel, Typography } from "@material-ui/core";
 import { commerce } from "../../lib/commerce";
 import React, { useState, useEffect } from "react";
-import CheckoutForm from "./CheckoutForm";
+
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Confirmation from "./Confirmation";
@@ -19,6 +19,7 @@ const Checkout = ({
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
+  const [taxingZone, setTaxingZone] = useState({});
 
   useEffect(() => {
     const generateToken = async () => {
@@ -33,7 +34,7 @@ const Checkout = ({
       }
     };
     generateToken();
-  }, []);
+  }, [cartData]);
 
   const nextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

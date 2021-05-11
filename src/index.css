@@ -1,3 +1,6 @@
+body {
+  color: #ffffff;
+}
 .main-container {
   position: relative;
   min-height: 80vh;
@@ -16,7 +19,7 @@
 }
 
 .product-styled-border:hover {
-  box-shadow: 0 0 15px 10px #ffd800;
+  box-shadow: 0 0 15px 10px /* #ffd800; */ #fc010a;
 }
 
 .add-to-cart-btn {

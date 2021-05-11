@@ -1,6 +1,40 @@
+import React, { useState, useEffect } from "react";
 import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
+import { commerce } from "../../lib/commerce";
 
 const Review = ({ checkoutToken }) => {
+  const [liveObj, setLiveObj] = useState({});
+  const [taxingZone, setTaxingZone] = useState({});
+
+  const fetchLiveoject = async (checkoutTokenId) => {
+    const response = await commerce.checkout.getLive(checkoutTokenId);
+    setLiveObj(response);
+  };
+  useEffect(() => {
+    fetchLiveoject(checkoutToken.id);
+  }, []);
+
+  const fetchTaxes = async (checkoutTokenId, obj) => {
+    const response = await commerce.checkout.setTaxZone(checkoutTokenId, obj);
+    setTaxingZone(response);
+    /*
+    if (obj) {
+
+    }
+    */
+  };
+  useEffect(() => {
+    fetchTaxes(checkoutToken.id, {
+      country: "US",
+      region: "SC",
+      postal_zip_code: "29102",
+    });
+  }, []);
+
+  //console.log("checkoutToken", checkoutToken.live.line_items);
+  console.log("live", liveObj);
+  console.log(checkoutToken);
+
   return (
     <>
       <Typography variant="h6" gutterBottom>

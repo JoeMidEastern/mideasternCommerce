@@ -56,6 +56,7 @@ const Cart = ({
                     <Col md={2}>{product.price.formatted_with_code}</Col>
                     <Col md={2}>
                       <Button
+                        style={{ border: "1px solid #ffffff" }}
                         className="my-2 mx-3"
                         type="button"
                         variant="dark"
@@ -68,6 +69,7 @@ const Cart = ({
                     </Col>
                     <Col md={2}>
                       <Button
+                        style={{ border: "1px solid #ffffff" }}
                         className="my-2 mx-3"
                         type="button"
                         variant="dark"
@@ -80,6 +82,7 @@ const Cart = ({
                     </Col>
                     <Col md={2}>
                       <Button
+                        style={{ border: "1px solid #ffffff" }}
                         className="my-2 mx-3"
                         variant="dark"
                         onClick={() => {
@@ -99,7 +102,7 @@ const Cart = ({
             <Card className="my-3">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h4>Total Cost: {totalCost}</h4>
+                  <h4 style={{ color: "#ffffff" }}>Total Cost: {totalCost}</h4>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Link to="/checkout">
@@ -114,13 +117,14 @@ const Cart = ({
           <ListGroup.Item>
             <Col sm={12}>
               <i
+                style={{ color: "#ffffff" }}
                 variant="danger"
                 type="button"
                 className="btn-block my-4"
                 onClick={() => handleEmptyCart()}
-                className="fas fa-trash-alt fa-4x ml-auto"
+                className="far fa-trash-alt fa-4x ml-auto"
               ></i>
-              <p>Empty Cart</p>
+              <p style={{ color: "#ffffff" }}>Empty Cart</p>
             </Col>
           </ListGroup.Item>
         </Col>

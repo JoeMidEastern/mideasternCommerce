@@ -23,7 +23,9 @@ const Navigate = ({ cartItems, totalCost }) => {
         <Nav className="ml-auto">
           {location.pathname === "/cart" ? (
             <div>
-              <h3 style={{ color: "white" }}>Total Cost: {totalCost}</h3>
+              <h3 className="mx-3" style={{ color: "white" }}>
+                Subtotal : {totalCost}
+              </h3>
             </div>
           ) : (
             <LinkContainer to="/cart">

@@ -227,22 +227,6 @@ const AddressForm = ({ checkoutToken, next }) => {
                   ))}
               </Select>
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-							<InputLabel>Shipping Options</InputLabel>
-							<Select
-								value={shippingOption}
-								fullWidth
-								onChange={e => setShippingOption(e.target.value)}
-							>
-								{options.map(option => {
-									return (
-										<MenuItem key={option.id} value={option.label}>
-											{option.label}
-										</MenuItem>
-									);
-								})}
-							</Select>
-						</Grid> */}
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>

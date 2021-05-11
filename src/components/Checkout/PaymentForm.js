@@ -20,6 +20,12 @@ const PaymentForm = ({
 }) => {
   const [taxingZone, setTaxingZone] = useState({});
   const [liveObject, setLiveObject] = useState({});
+  const [ip, setIp] = useState(null);
+
+  ////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////
+
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
@@ -65,33 +71,7 @@ const PaymentForm = ({
       nextStep();
     }
   };
-
-  const fetchLiveObject = async (checkoutTokenId) => {
-    const res = await commerce.checkout.getLive(checkoutTokenId);
-    setLiveObject(res);
-  };
-
-  const fetchTaxZone = async (checkoutTokenId) => {
-    const res = await commerce.checkout.setTaxZone(checkoutTokenId, {
-      country: "US",
-      region: "SC",
-      postal_zip_code: 29102,
-    });
-    setTaxingZone(res);
-    console.log(res);
-  };
-
-  useEffect(() => {
-    fetchTaxZone(checkoutToken.id);
-  }, []);
-
-  useEffect(() => {
-    fetchLiveObject(checkoutToken.id);
-  }, []);
-
-  console.log("SHIPPING DATA", shippingData);
-  console.log("TAXINGZONE", taxingZone);
-  console.log("LIVE OBJECT", liveObject);
+  console.log("checkout token".checkoutToken);
   return (
     <>
       <Review checkoutToken={checkoutToken} />
@@ -115,7 +95,9 @@ const PaymentForm = ({
                   disabled={!stripe}
                   color="primary"
                 >
-                  Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                  Pay
+                  {/* {taxingZone.live.total_with_tax.formatted_with_symbol} */}
+                  {checkoutToken.live.total_with_tax.formatted_with_symbol}
                 </Button>
               </div>
             </form>

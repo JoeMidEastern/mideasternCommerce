@@ -1,23 +1,42 @@
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
+import ProductOverlay from "./ProductOverlay/ProductOverlay";
 
 const Product = ({ product, addProduct }) => {
+  const [readMore, setReadMore] = useState(false);
   return (
     <div>
       <Card
         className=" product-styled-border my-3"
-        style={{ width: "18rem", height: "30rem", border: "1px solid white" }}
+        style={{
+          width: "18rem",
+          height: "30rem",
+          border: "1px solid white",
+        }}
       >
         <Card.Img
           variant="top"
           src={product.media.source}
           style={{ height: "18rem" }}
         />
-        <Card.Body>
+        <Card.Body style={{ backgroundColor: "#012b36" }}>
           <Card.Title>
             <h6 className="truncated-desc">{product.name}</h6>
           </Card.Title>
 
-          <Card.Text className="my-3">
+          <Card.Text
+            onClick={() => console.log("show description")}
+            style={{
+              textAlign: "center",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            className="my-3 showMoreBtn"
+          >
+            <ProductOverlay product={product} />
+          </Card.Text>
+
+          <Card.Text className="my-3 ml-auto">
             {product.price.formatted_with_symbol}
           </Card.Text>
 
@@ -27,8 +46,8 @@ const Product = ({ product, addProduct }) => {
             </Button>
           ) : (
             <Button
+              style={{ backgroundColor: "#fc010a" }}
               className="btn-block add-to-cart-btn"
-              variant="primary"
               onClick={() => addProduct(product.id, 1)}
             >
               <i className="fas fa-arrow-circle-up"></i>
